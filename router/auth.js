@@ -1,30 +1,42 @@
-import express from "express"
-import * as tweetController from '../controller/tweet.js'
-import * as authController from '../controller/auth.js'
-import {body,param, validationResult} from 'express-validator'
-import {validate} from "../middleware/validator.js"
-import { isAuth} from '../middleware/auth.js '
+import express from "express";
+import {body} from 'express-validator'
+import {validate} from '../middleware/validator.js'
+import * as authController from '../controller/auth.js' 
+import {isAuth} from '../middleware/auth.js';
+
+const router = express.Router();
 
 const validateCredential = [
-    body('username').trim().notEmpty().withMessage('반드시 입력'),
-    body('password').trim().isLength({min:4}).withMessage('4자 이상'),validate
+    body('username')
+        .trim()
+        .notEmpty()
+        .withMessage('username은 반드시 입력해야 함'),
+    body('password')
+        .trim()
+        .isLength({min:4})
+        .withMessage('password는 반드시 4자 이상이여야 함'),
+    validate
 ]
 
 const validateSignup = [
     ...validateCredential,
-    body('name').notEmpty().withMessage('name 반드시 입력'),
+    body('name').notEmpty().withMessage('name은 반드시 입력'),
     body('email').isEmail().withMessage('email 형식 확인'),
-    body('url').isURL().withMessage('URL 형식 확인').optional({nullable: true,checkFalsy: true}),validate
+    body('url').isURL().withMessage('URL 형식 확인')
+        .optional({nullable:true, checkFalsy: true}),
+    validate
+
 ]
 
+// 회원가입  /tweets/signup
+router.post('/signup',validateSignup, authController.signup)
 
-const router = express.Router()
+// 로그인   /tweets/login
+router.post('/login',validateCredential, authController.login)
+
+// JWT 확인
+router.get('/me', isAuth, authController.me)
 
 
-router.post('/signup', validateSignup,authController.signup)
-router.post('/login', validateCredential,)
-router.get('/me', isAuth,authController.me)
 
-
-
-export default router
+export default router;

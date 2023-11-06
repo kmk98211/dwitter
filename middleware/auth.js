@@ -3,7 +3,7 @@ import * as userRepository from '../data/auth.js'
 
 const AUTH_ERROR = { message: '에러'}
 
-export const isAuth = async (req,res,next) => {
+export const isAuth = async (req, res, next) => {
     const authHeader = req.get('Authorization')
 
     if(!(authHeader && authHeader.startsWith('Bearer '))) {
