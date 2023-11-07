@@ -32,7 +32,7 @@ export async function gettAllByUsername(username){
 export async function getById(id) {
     const found = tweets.find((tweet) => tweet.id === id)
     if(!found) {
-        return null;;
+        return null;
     }
     const {username, name, url} = await userRepository.findById(found.userId)
     return {...found, username, name, url}
@@ -42,7 +42,7 @@ export async function create(text, userId){
     const tweet = {
         id : '10',
         text,
-        createdAt : Date.now().toString,          //text:text이랑 같음  이름 같으면 :안써도됨
+        createdAt : Date.now().toString,     //text:text이랑 같음  이름 같으면 :안써도됨
         userId
     }
     tweets = [tweet, ...tweets]
