@@ -24,3 +24,29 @@ git checkout [브랜치 이름]
 
 branch 생성과 동시에 전환 
 git checkout -b [브랜치 이름]
+
+MongoDB
+- https://www.mongodb.com/ko-kr
+- 몽고디비는 NoSQL 데이터베이스 시스템 중 하나로, 문서 지향 데이터베이스
+- JSON 형식의 BSON(Binary JSON) 문서를 사용하여 데이터를 저장하기 때문에 유연하고 확장 가능한 데이터 모델을 제공함
+- NoSQL 데이터베이스는 관계형 데이터베이스와 다르게 스키마가 고정되어 있지 않아 유동적인 데이터구조를 다룰 수 있음
+- 대량의 데이터를 다루는 대규모 어플리케이션과 웹 서비스에서 주로 사용됨
+- 분산 데이터베이스 환경에서 잘 작동(수평적 확장이 가능)
+
+✔ 스키마 
+- 데이터를 저장하기 위해서 규격을 만들어주는 것
+
+
+kdt.users.insertOne({
+    "name": "apple",
+    "age": 20,
+    "gender": "female"
+})
+
+kdt.users.insertOne([
+    {"name": "apple", "age": 20, "gender": "female"},
+    {"name": "orange", "age": 30, "gender": "mele"},
+    {"name": "melon", "age": 27, "gender": "mele"}
+])
+
+{"userid": "avocado", "name": "안가도", "email": "avocado@avocado.com", "gender": "mele"}
